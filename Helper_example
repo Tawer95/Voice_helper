@@ -1,0 +1,42 @@
+pip install pyttsx3
+pip install speechRecognition
+
+import pyttsx3
+import datetime
+import speechRecognition as sr
+
+engine = pyttsx3.init('sapi5')
+voices = engine.getProperty('voices') #даёт подробности о текущем установленном голосе
+engine.setProperty('voice', voice[1].id)  # 0-мужской , 1-женский
+def speak(audio):   
+  engine.say(audio)    
+engine.runAndWait() #Без этой команды мы не услышим речь
+if __name__=="__main__" :
+speak('Hello Sir, I am Friday, your Artificial intelligence assistant. Please tell me how may I help you')
+def wishme():
+   hour = int(datetime.datetime.now().hour)
+def wishMe():
+    hour = int(datetime.datetime.now().hour)
+    if hour>=0 and hour<12:
+        speak("Good Morning!")    
+    elif hour>=12 and hour<18:
+        speak("Good Afternoon!")       
+    else:
+        speak("Good Evening!")      
+   speak('Hello Sir, I am Friday, your Artificial intelligence assistant. Please tell me how may I help you')
+def takeCommand():
+    #Принимает на входе аудио от микрофона, возвращает строку с нашими словами    
+     r = sr.Recognizer()
+     with sr.Microphone() as source:
+         print("Listening...")
+         r.pause_threshold = 1
+         audio = r.listen(source)
+try:
+        print("Recognizing...")    
+        query = r.recognize_google(audio, language='en-in') #Используем google для распознания голоса.
+        print(f"User said: {query}\n")  #Запрос пользователя выведен.    
+except Exception as e:
+        # print(e)  используйте только если хотите видеть ошибку!
+        print("Say that again please...")   #будет выведено, если речь не распознаётся
+        return "None" #вернётся строка "Пусто"
+    return query
